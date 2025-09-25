@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../styles/stylish.css" />
+</head>
+<body>
+  <div class="sticky-header" id="stickyHeader">
+    <div class="header-container">
+      <header>
+      <img src="../images/logo.jpg" alt="Logo">
+        <nav>
+          <ul class="nav-links">
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="hiw.html">How it works</a></li>
+            <li><a href="compare.html">Compare</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="../index.html">Logout</a></li>
+          </ul>
+        </nav>
+                
+        <div class="header-right">
+          <div class="search-bar">
+            <input type="text" placeholder="Search products...">
+            <button>🔍</button>
+          </div>
+                    
+          <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </header>
+    </div>
+
+  </head>
+  <body>
+    <main>
+      <div class="contact-page">
+        <div
+          class="contact-card contact-info"
+          aria-labelledby="contact-heading"
+        >
+          <h2 id="contact-heading">Contact Us</h2>
+          <p>
+            We're here to help. Whether you have feedback, partnership enquiries
+            or need support.
+          </p>
+
+          <p>
+            <strong>Email</strong><br /><a href="mailto:support@budgetbite.com"
+              >support@budgetbite.com</a
+            >
+          </p>
+          <p>
+            <strong>Phone</strong><br /><a href="tel:0762599389"
+              >+27 76 259 9389</a
+            >
+          </p>
+          <p>
+            <strong>Address</strong><br />1 Molotlegi Street, Ga-Rankuwa, 0208
+          </p>
+          <p class="muted">
+            <strong>Support hours:</strong> Mon–Fri 08:00–17:00
+          </p>
+
+          <hr
+            style="border: none; border-top: 1px solid #f0f0f0; margin: 16px 0"
+          />
+
+          <h3>Other ways to reach us</h3>
+          <p class="muted">
+            Use the form to send us a message and we'll respond within 1 to 2
+            business days.
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <div
+            class="success"
+            id="contactSuccess"
+            role="status"
+            aria-live="polite"
+          >
+            Thanks. Your message has been received.
+          </div>
+          <form id="contactForm" class="contact-form" novalidate>
+            <label for="name">Full name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Your name"
+            />
+
+            <label for="email">Email address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="you@example.com"
+            />
+
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option>General feedback</option>
+              <option>Report an issue</option>
+              <option>Partnership enquiry</option>
+              <option>Other</option>
+            </select>
+
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              placeholder="Tell us what's happening..."
+            ></textarea>
+
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin-top: 14px;
+              "
+            >
+              <button type="submit" class="btn-send">Send message</button>
+              <button
+                type="button"
+                id="clearBtn"
+                style="
+                  background: #f3f3f3;
+                  border: none;
+                  padding: 10px 12px;
+                  border-radius: 8px;
+                  cursor: pointer;
+                "
+              >
+                Clear
+              </button>
+            </div>
+
+            <p class="muted" style="margin-top: 12px">
+              We respect your privacy.
+            </p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        const form = document.getElementById("contactForm");
+        const success = document.getElementById("contactSuccess");
+        const clearBtn = document.getElementById("clearBtn");
+
+        function showSuccess(msg) {
+          success.textContent =
+            msg || "Thanks — your message has been received.";
+          success.style.display = "block";
+          setTimeout(() => (success.style.display = "none"), 5000);
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          const data = {
+            name: form.name.value.trim(),
+            email: form.email.value.trim(),
+            subject: form.subject.value,
+            message: form.message.value.trim(),
+            createdAt: new Date().toISOString(),
+          };
+          // store locally (demo) and show success
+          const stored = JSON.parse(
+            localStorage.getItem("bb_messages") || "[]"
+          );
+          stored.unshift(data);
+          localStorage.setItem(
+            "bb_messages",
+            JSON.stringify(stored.slice(0, 50))
+          ); // keep last 50
+          form.reset();
+          showSuccess(
+            "Message saved locally. We will contact you at " +
+              data.email +
+              " if needed."
+          );
+        });
+
+        clearBtn.addEventListener("click", () => form.reset());
+      })();
+    </script>
+
+  <footer>
+    <p>&copy; 2025 BudgetBite. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

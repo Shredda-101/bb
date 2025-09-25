@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login page</title>
+    <link rel="stylesheet" href="../styles/stylish.css" />
+  </head>
+  <body class="login-page">
+    <div class="login-container">
+      <h2>Login</h2>
+      <form onsubmit="window.location.href='explore.html'; return false;">
+        <input
+          type="text"
+          name="username"
+          placeholder=" Username"
+          required
+        /><br /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder=" Password"
+          required
+        /><br /><br />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+    <script>
+      document.querySelector('form').onsubmit = function(e) {
+        e.preventDefault();
+        window.location.href = 'explore.html';
+      };
+    </script>
+  </body>
+</html>
